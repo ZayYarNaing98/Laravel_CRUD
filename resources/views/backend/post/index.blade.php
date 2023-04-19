@@ -1,22 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Post Blog</title>
-    <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}" />
-
-
-</head>
-<body>
+@extends('backend.layout.master')
+@section('content')
     <div class="container py-5">
         <h2 class="text-center text-primary">Post List</h2>
         <a href="{{ route('post.create') }}" class="btn btn-success btn-sm mb-4">Add New</a>
 
         <table class="table table-striped">
             <tr>
-                <th>ID</th>
+                <th>NO</th>
+                <th>#</th>
                 <th>Title</th>
                 <th>Description</th>
                 <th>Status</th>
@@ -25,6 +16,7 @@
             </tr>
             @forelse ($data as $row)
             <tr>
+                <td>{{ $loop->iteration }}</td>
                 <td>{{ $row->id }}</td>
                 <td>{{ $row->title }}</td>
                 <td>{{ $row->description }}</td>
@@ -57,5 +49,4 @@
     </div>
 
     <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
-</body>
-</html>
+@endsection
