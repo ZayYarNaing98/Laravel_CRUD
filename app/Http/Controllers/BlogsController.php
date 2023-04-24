@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+
 use App\Models\Blog;
+use GuzzleHttp\Middleware;
 use Illuminate\Http\Request;
+
 
 class BlogsController extends Controller
 {
@@ -12,9 +15,20 @@ class BlogsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct()
+    {
+        $this->middleware('permission:blogList', ['only' => ['index']]);
+        $this->middleware('permission:blogCreate', ['only' => ['create', 'store']]);
+        $this->middleware('permission:blogEdit', ['only' => ['edit']]);
+        $this->middleware('permission:blogDelete', ['only' => ['destroy']]);
+        $this->middleware('permission:blogShow', ['only' => ['show']]);
+        $this->middleware('auth');
+    }
+
     public function index()
     {
-        $data = Blog::paginate(5);
+        $data = Blog::all();
 
         return view('backend.blog.index', compact('data'));
     }

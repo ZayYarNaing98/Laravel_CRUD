@@ -17,8 +17,8 @@
             </div>
 
             <div class="form-check form-switch">
-                <label class="form-check-label" >Active or Inactive</label>
-                <input type="checkbox" class="form-check-input" name="is_active"  {{ ($result->is_active === 1) ? "checked": "" }} />
+                <label class="form-check-label" >Status</label>
+                <input type="checkbox" class="form-check-input ms-2" name="is_active"  {{ ($result->is_active === 1) ? "checked": "" }} />
               </div>
 
             <button type="submit" class="btn btn-success mt-3">Update</button>

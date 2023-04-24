@@ -25,7 +25,7 @@ Route::get('/', function(){
 Route::resource('/blog', BlogsController::class);
 Route::resource('/post', PostsController::class);
 
-Route::get('/newblog',[BlogController::class,('index')])->name('newblog.index');
+Route::get('newblog',[BlogController::class,('index')])->name('newblog.index');
 Route::get('newblog/create',[BlogController::class,('create')])->name('newblog.create');
 Route::post('newblog/store',[BlogController::class,('store')])->name('newblog.store');
 Route::get('newblog/show/{blog}',[BlogController::class,('show')])->name('newblog.show');
@@ -37,6 +37,6 @@ Route::get('/admin', [AdminController::class, ('index')])->name('admin');
 Route::get('/admin/widget', [AdminController::class, ('widget')])->name('admin.widget');
 
 
-Auth::routes();
+Auth::routes(['register' => false]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
