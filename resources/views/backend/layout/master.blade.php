@@ -263,36 +263,36 @@
                         <!-- Add icons to the links using the .nav-icon class
                        with font-awesome or any other icon font library -->
                        @can('dashboard')
-                       <li class="nav-item">
-                        <a href="{{ route('admin') }}" class="nav-link {{ request()->is('admin')?'active':'' }}">
-                            <i class="nav-icon fas fa-tachometer-alt"></i>
-                            <p>
-                                Dashboard
-                            </p>
-                        </a>
-                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('admin') }}" class="nav-link {{ request()->is('admin')?'active':'' }}">
+                                <i class="nav-icon fas fa-tachometer-alt"></i>
+                                <p>
+                                    Dashboard
+                                </p>
+                            </a>
+                            </li>
                        @endcan
 
                        @can('widget')
-                       <li class="nav-item">
-                        <a href="{{ route('admin.widget') }}" class="nav-link {{ request()->is('admin/widget')?'active':'' }}">
-                            <i class="nav-icon fas fa-th"></i>
-                            <p>
-                                Widgets
-                            </p>
-                        </a>
-                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('admin.widget') }}" class="nav-link {{ request()->is('admin/widget')?'active':'' }}">
+                                <i class="nav-icon fas fa-th"></i>
+                                <p>
+                                    Widgets
+                                </p>
+                            </a>
+                            </li>
                        @endcan
 
                         @can('blogList')
-                        <li class="nav-item">
-                            <a href="{{ route('blog.index') }}" class="nav-link {{ request()->is('blog')?'active':'' }}">
-                                <i class="nav-icon fa-solid fa-blog"></i>
-                                <p>
-                                    Blogs
-                                </p>
-                            </a>
-                        </li>
+                            <li class="nav-item">
+                                <a href="{{ route('blog.index') }}" class="nav-link {{ request()->is('blog')?'active':'' }}">
+                                    <i class="nav-icon fa-solid fa-blog"></i>
+                                    <p>
+                                        Blogs
+                                    </p>
+                                </a>
+                            </li>
                         @endcan
 
                         {{-- <li class="nav-item">
@@ -303,6 +303,38 @@
                                 </p>
                             </a>
                         </li> --}}
+
+                        @can('userList')
+                            <li class="nav-item">
+                                <a href="{{ route('user.index') }}" class="nav-link  {{ request()->is('post')?'active':'' }}">
+                                    <i class="nav-icon fas fa-user"></i>
+                                    <p>
+                                    User
+                                    </p>
+                                </a>
+                            </li>
+                        @endcan
+
+                        @can('permissionList')
+                        <li class="nav-item">
+                            <a href="{{ route('permission.index') }}" class="nav-link  {{ request()->is('post')?'active':'' }}">
+                                <i class="nav-icon fa-solid fa-star-of-life"></i>
+                                <p>
+                                Permission
+                                </p>
+                            </a>
+                        </li>
+                        @endcan
+
+                        <li class="nav-item">
+                            <a href="{{ route('role.index') }}" class="nav-link  {{ request()->is('post')?'active':'' }}">
+                                <i class="nav-icon fa-solid fa-wand-magic-sparkles"></i>
+                                <p>
+                                Role
+                                </p>
+                            </a>
+                        </li>
+
                     </ul>
                 </nav>
                 <!-- /.sidebar-menu -->

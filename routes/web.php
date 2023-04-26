@@ -6,6 +6,9 @@ use App\Http\Controllers\BlogController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BlogsController;
 use App\Http\Controllers\PostsController;
+use App\Http\Controllers\PermissionController;
+use App\Http\Controllers\RoleController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,6 +27,11 @@ Route::get('/', function(){
 
 Route::resource('/blog', BlogsController::class);
 Route::resource('/post', PostsController::class);
+
+Route::resource('/permission', PermissionController::class);
+Route::resource('/role', RoleController::class);
+
+Route::resource('/user', UserController::class);
 
 Route::get('newblog',[BlogController::class,('index')])->name('newblog.index');
 Route::get('newblog/create',[BlogController::class,('create')])->name('newblog.create');

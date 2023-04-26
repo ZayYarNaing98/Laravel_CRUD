@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 use App\Models\Blog;
 use GuzzleHttp\Middleware;
 use Illuminate\Http\Request;
+use App\Http\Requests\BlogRequest;
 
 
 class BlogsController extends Controller
@@ -49,12 +50,26 @@ class BlogsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(BlogRequest $request)
     {
-        Blog::create([
-            'name' => $request->name,
-            'description' => $request->description,
-        ]);
+
+        // Blog::create([
+        //     'name' => $request->name,
+        //     'description' => $request->description,
+        // ]);
+
+        // return redirect()->route('blog.index');
+
+
+        $data = $request->validated();
+        if($request->hasFile('image'))
+        {
+         $imageName = time().'.'.$request->image->extension();
+         $request->image->move(public_path('blog_image'), $imageName);
+         $data = array_merge($data,['image' => $imageName]);
+        }
+
+         Blog::create($data);
 
         return redirect()->route('blog.index');
 
@@ -97,7 +112,7 @@ class BlogsController extends Controller
     {
 
         $data = Blog::where('id', $id)->first();
-        // dd($data);
+
         $data->update([
             'name' => $request->name,
             'description' => $request->description

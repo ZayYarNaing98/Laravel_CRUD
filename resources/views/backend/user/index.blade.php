@@ -1,19 +1,20 @@
 @extends('backend.layout.master')
+
 @section('content')
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Blog Lists</h1>
-                    @can('blogCreate')
-                        <a href="{{ route('blog.create') }}" class="btn btn-success btn-sm mt-2">Add New</a>
+                    <h1>User Lists</h1>
+                    @can('userCreate')
+                        <a href="{{ route('user.create') }}" class="btn btn-success btn-sm mt-2">Add New</a>
                     @endcan
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="{{ route('admin') }}">Home</a></li>
-                        <li class="breadcrumb-item active">Blogs</li>
+                        <li class="breadcrumb-item active">Role</li>
                     </ol>
                 </div>
             </div>
@@ -37,55 +38,48 @@
                                         <th>#</th>
                                         <th>ID</th>
                                         <th>Name</th>
-                                        <th>Image</th>
-                                        <th>Description</th>
+                                        <th>Email</th>
+                                        <th>Role</th>
                                         <th>Handle</th>
-                                        <th>Handle</th>
-                                        @can('blogDelete')
-                                            <th>Handle</th>
-                                        @endcan
 
+                                    </tr>
                                 </thead>
                                 <tbody>
-
-                                    @foreach ($data as $val)
+                                    @foreach ($user as $row)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
-                                            <td>ID-{{ $val->id }}</td>
-                                            <td>{{ $val->name }}</td>
+                                            <td>ID-{{ $row->id }}</td>
+                                            <td>{{ $row->name }}</td>
                                             <td>
-                                                <img src={{ asset('blog_image/' . $val->image) }} alt="image" />
+                                                <span class="badge badge-success">
+                                                    {{ $row->email }}
+                                                </span>
                                             </td>
-                                            <td>{{ $val->description }}</td>
+                                            <td>
+                                                @foreach ($row->roles as $role)
+                                                    <span class="badge badge-info">{{ $role->name }}</span>
+                                                @endforeach
+                                            </td>
 
+                                            <td>
+                                                @can('userShow')
+                                                    <a href="{{ route('user.show', $row->id) }}" class="btn btn-secondary btn-sm">View</a>
+                                                @endcan
 
-                                            @can('blogEdit')
-                                                <td>
-                                                    <a href="{{ route('blog.edit', $val->id) }}"
-                                                        class="btn btn-warning btn-sm">Edit</a>
+                                                @can('userEdit')
+                                                    <a href="{{ route('user.edit', $row->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                                                @endcan
 
-                                                </td>
-                                            @endcan
-
-                                            @can('blogShow')
-                                                <td>
-                                                    <a href="{{ route('blog.show', $val->id) }}"
-                                                        class="btn btn-secondary btn-sm">View</a>
-                                                </td>
-                                            @endcan
-
-                                            @can('blogDelete')
-                                                <td>
-                                                    <form class="d-inline" action="{{ route('blog.destroy', $val->id) }}"
+                                                @can('userDelete')
+                                                    <form class="d-inline" action="{{ route('user.destroy', $row->id) }}"
                                                         method="POST">
                                                         @csrf
                                                         @method('DELETE')
                                                         <button type="submit" class="btn btn-danger btn-sm"
                                                             onclick="return confirm('Are you sure you want to delete?')">Delete</button>
                                                     </form>
-                                                </td>
-                                            @endcan
-
+                                                @endcan
+                                            </td>
                                         </tr>
                                     @endforeach
                                 </tbody>

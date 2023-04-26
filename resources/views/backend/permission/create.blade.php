@@ -2,29 +2,21 @@
 @section('content')
 
             <div class="container">
-                <h2>New Blog</h2>
-                <a href="{{ route('blog.index') }}" class="btn btn-secondary btn-sm mb-3">Back</a>
+                <h2>New Permission</h2>
+                <a href="{{ route('permission.index') }}" class="btn btn-secondary btn-sm mb-3">Back</a>
                 <div class="card my-3">
                     <div class="card-header bg-primary">
-                        Create New Blog
+                        Create New Permission
                     </div>
                     <div class="card-body">
-                        <form method="POST" action="{{ route('blog.store') }}" enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('permission.store') }}">
                             @csrf
                             <div class="mb-3">
                               <label for="name" class="form-label">Name</label>
                               <input type="text" name="name" class="form-control" id="name" />
                             </div>
-                            <div class="mb-3">
-                              <label for="description" class="form-label">Description</label>
-                              <input type="text" name="description" class="form-control" id="desc" />
-                            </div>
-                            <div class="mb-3">
-                                <label for="image" class="form-label">Image</label>
-                                <input type="file" class="form-control" id="exampleInputFile" name="image">
-                            </div>
-
                             <button type="submit" class="btn btn-success">Create</button>
+                            <a href="{{ route('permission.index') }}" class="btn btn-warning">Cancel</a>
                         </form>
                     </div>
                 </div>
