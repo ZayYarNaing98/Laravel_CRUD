@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 
 use App\Models\Blog;
+use App\Models\Author;
 use GuzzleHttp\Middleware;
 use Illuminate\Http\Request;
 use App\Http\Requests\BlogRequest;
-
+use App\Repository\Blog\BlogRepositoryInterface;
+use App\Service\Blog\BlogServiceInterface;
 
 class BlogsController extends Controller
 {
@@ -17,8 +19,12 @@ class BlogsController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function __construct()
+    private $blogRepo,$blogService;
+
+    public function __construct( BlogRepositoryInterface $blogRepo, BlogServiceInterface $blogService )
     {
+        $this->blogRepo = $blogRepo;
+        $this->blogService = $blogService;
         $this->middleware('permission:blogList', ['only' => ['index']]);
         $this->middleware('permission:blogCreate', ['only' => ['create', 'store']]);
         $this->middleware('permission:blogEdit', ['only' => ['edit']]);
@@ -29,8 +35,7 @@ class BlogsController extends Controller
 
     public function index()
     {
-        $data = Blog::all();
-
+        $data = $this->blogRepo->get();
         return view('backend.blog.index', compact('data'));
     }
 
@@ -41,7 +46,8 @@ class BlogsController extends Controller
      */
     public function create()
     {
-        return view('backend.blog.create');
+        $data = Author::all();
+        return view('backend.blog.create', compact('data'));
     }
 
     /**
@@ -52,24 +58,18 @@ class BlogsController extends Controller
      */
     public function store(BlogRequest $request)
     {
+        // $data = $request->validated();
+        // if($request->hasFile('image'))
+        // {
+        //  $imageName = time().'.'.$request->image->extension();
+        //  $request->image->move(public_path('blog_image'), $imageName);
+        //  $data = array_merge($data,['image' => $imageName]);
+        // }
 
-        // Blog::create([
-        //     'name' => $request->name,
-        //     'description' => $request->description,
-        // ]);
-
-        // return redirect()->route('blog.index');
-
+        // Blog::create($data);
 
         $data = $request->validated();
-        if($request->hasFile('image'))
-        {
-         $imageName = time().'.'.$request->image->extension();
-         $request->image->move(public_path('blog_image'), $imageName);
-         $data = array_merge($data,['image' => $imageName]);
-        }
-
-         Blog::create($data);
+        $this->blogService->store($data);
 
         return redirect()->route('blog.index');
 
@@ -83,7 +83,7 @@ class BlogsController extends Controller
      */
     public function show($id)
     {
-        $result = Blog::where('id', $id)->first();
+        $result = $this->blogRepo->show($id);
         return view('backend.blog.show', compact('result'));
     }
 

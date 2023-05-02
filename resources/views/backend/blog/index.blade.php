@@ -39,6 +39,7 @@
                                         <th>Name</th>
                                         <th>Image</th>
                                         <th>Description</th>
+                                        <th>Author</th>
                                         <th>Handle</th>
                                         <th>Handle</th>
                                         @can('blogDelete')
@@ -54,9 +55,12 @@
                                             <td>ID-{{ $val->id }}</td>
                                             <td>{{ $val->name }}</td>
                                             <td>
-                                                <img src={{ asset('blog_image/' . $val->image) }} alt="image" />
+                                                <img src={{ asset('blog_image/' . $val->image) }} alt="image" style="width:50px; height:50px" />
                                             </td>
                                             <td>{{ $val->description }}</td>
+                                            <td>
+                                                {{ $val->author->name }}
+                                            </td>
 
 
                                             @can('blogEdit')

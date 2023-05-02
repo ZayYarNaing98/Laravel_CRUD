@@ -11,17 +11,29 @@
                     <div class="card-body">
                         <form method="POST" action="{{ route('blog.store') }}" enctype="multipart/form-data">
                             @csrf
+
                             <div class="mb-3">
                               <label for="name" class="form-label">Name</label>
                               <input type="text" name="name" class="form-control" id="name" />
                             </div>
+
                             <div class="mb-3">
                               <label for="description" class="form-label">Description</label>
                               <input type="text" name="description" class="form-control" id="desc" />
                             </div>
+
                             <div class="mb-3">
                                 <label for="image" class="form-label">Image</label>
-                                <input type="file" class="form-control" id="exampleInputFile" name="image">
+                                <input type="file" name="image" class="form-control" id="exampleInputFile" />
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="author" class="form-label">Author</label>
+                                <select name="author_id" id="author_id" class="form-select" />
+                                    @foreach ($data as $val)
+                                        <option value="{{ $val->id }}">{{ $val->name }}</option>
+                                    @endforeach
+                                </select>
                             </div>
 
                             <button type="submit" class="btn btn-success">Create</button>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use Illuminate\Http\Request;
+use App\Http\Requests\PostRequest;
 
 class PostsController extends Controller
 {
@@ -34,15 +35,32 @@ class PostsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PostRequest $request)
     {
 
-        Post::create([
-            'title' => $request->title,
-            'description' => $request->description,
-            'is_active' => $request->has('is_active') ? 1:0,
+        // Post::create([
+        //     'title' => $request->title,
+        //     'description' => $request->description,
+        //     'is_active' => $request->has('is_active') ? 1:0,
 
-        ]);
+        // ]);
+
+        // return redirect()->route('post.index');
+
+        $data = $request->validated();
+        if($request->hasFile('image'))
+        {
+         $imageName = time().'.'.$request->image->extension();
+         $request->image->storeAs('public/post_image/', $imageName);
+         $data = array_merge($data,['image' => $imageName]);
+        }
+
+        if ($request->has('is_active')) {
+            $data['is_active'] = true;
+        } else {
+            $data['is_active'] = false;
+        }
+        Post::create($data);
 
         return redirect()->route('post.index');
     }

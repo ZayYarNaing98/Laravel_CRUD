@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\Blog;
+use App\Models\Author;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -22,9 +23,17 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
 
+        Author::create([
+            'name' => 'Sayar Bo',
+        ]);
+
+        Author::create([
+            'name' => 'Saw Kyi Phyu'
+        ]);
+
         $this->call(RoleAndPermissionSeeder::class);
         $this->call(AdminSeeder::class);
 
-        Blog::factory()->count(20)->create();
+        // Blog::factory()->count(20)->create();
     }
 }

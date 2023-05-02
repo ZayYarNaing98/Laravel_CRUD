@@ -295,18 +295,18 @@
                             </li>
                         @endcan
 
-                        {{-- <li class="nav-item">
+                        <li class="nav-item">
                             <a href="{{ route('post.index') }}" class="nav-link  {{ request()->is('post')?'active':'' }}">
                                 <i class="nav-icon fas fa-edit"></i>
                                 <p>
                                     Post
                                 </p>
                             </a>
-                        </li> --}}
+                        </li>
 
                         @can('userList')
                             <li class="nav-item">
-                                <a href="{{ route('user.index') }}" class="nav-link  {{ request()->is('post')?'active':'' }}">
+                                <a href="{{ route('user.index') }}" class="nav-link  {{ request()->is('user')?'active':'' }}">
                                     <i class="nav-icon fas fa-user"></i>
                                     <p>
                                     User
@@ -317,7 +317,7 @@
 
                         @can('permissionList')
                         <li class="nav-item">
-                            <a href="{{ route('permission.index') }}" class="nav-link  {{ request()->is('post')?'active':'' }}">
+                            <a href="{{ route('permission.index') }}" class="nav-link  {{ request()->is('permission')?'active':'' }}">
                                 <i class="nav-icon fa-solid fa-star-of-life"></i>
                                 <p>
                                 Permission
@@ -327,7 +327,7 @@
                         @endcan
 
                         <li class="nav-item">
-                            <a href="{{ route('role.index') }}" class="nav-link  {{ request()->is('post')?'active':'' }}">
+                            <a href="{{ route('role.index') }}" class="nav-link  {{ request()->is('role')?'active':'' }}">
                                 <i class="nav-icon fa-solid fa-wand-magic-sparkles"></i>
                                 <p>
                                 Role
