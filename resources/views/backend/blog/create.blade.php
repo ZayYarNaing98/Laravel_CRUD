@@ -29,7 +29,7 @@
 
                             <div class="mb-3">
                                 <label for="author" class="form-label">Author</label>
-                                <select name="author_id" id="author_id" class="form-select" />
+                                <select name="author_id" id="author_id" class="form-select">
                                     @foreach ($data as $val)
                                         <option value="{{ $val->id }}">{{ $val->name }}</option>
                                     @endforeach

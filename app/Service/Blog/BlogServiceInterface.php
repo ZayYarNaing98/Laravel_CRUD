@@ -6,6 +6,6 @@ interface BlogServiceInterface
 {
     public function store($data);
 
-    public function update();
+    public function update($id, $data);
 }
 

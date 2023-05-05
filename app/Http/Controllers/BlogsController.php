@@ -58,16 +58,6 @@ class BlogsController extends Controller
      */
     public function store(BlogRequest $request)
     {
-        // $data = $request->validated();
-        // if($request->hasFile('image'))
-        // {
-        //  $imageName = time().'.'.$request->image->extension();
-        //  $request->image->move(public_path('blog_image'), $imageName);
-        //  $data = array_merge($data,['image' => $imageName]);
-        // }
-
-        // Blog::create($data);
-
         $data = $request->validated();
         $this->blogService->store($data);
 
@@ -95,9 +85,9 @@ class BlogsController extends Controller
      */
     public function edit($id)
     {
+        $data = Author::all();
         $result = Blog::where('id',$id)->first();
-        // dd($result);
-        return view('backend.blog.edit',compact('result'));
+        return view('backend.blog.edit',compact('data','result'));
 
     }
 
@@ -108,15 +98,11 @@ class BlogsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(BlogRequest $request, $id)
     {
 
-        $data = Blog::where('id', $id)->first();
-
-        $data->update([
-            'name' => $request->name,
-            'description' => $request->description
-        ]);
+        $data = $request->validated();
+        $this->blogService->update($id, $data);
 
         return redirect()->route('blog.index');
 

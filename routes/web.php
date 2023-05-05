@@ -33,13 +33,13 @@ Route::resource('/role', RoleController::class);
 
 Route::resource('/user', UserController::class);
 
-Route::get('newblog',[BlogController::class,('index')])->name('newblog.index');
-Route::get('newblog/create',[BlogController::class,('create')])->name('newblog.create');
-Route::post('newblog/store',[BlogController::class,('store')])->name('newblog.store');
-Route::get('newblog/show/{blog}',[BlogController::class,('show')])->name('newblog.show');
-Route::get('newblog/edit/{blog}',[BlogController::class,('edit')])->name('newblog.edit');
-Route::post('newblog/update/{blog}',[BlogController::class,('update')])->name('newblog.update');
-Route::post('newblog/destroy/{blog}',[BlogController::class,('destroy')])->name('newblog.destroy');
+// Route::get('newblog',[BlogController::class,('index')])->name('newblog.index');
+// Route::get('newblog/create',[BlogController::class,('create')])->name('newblog.create');
+// Route::post('newblog/store',[BlogController::class,('store')])->name('newblog.store');
+// Route::get('newblog/show/{blog}',[BlogController::class,('show')])->name('newblog.show');
+// Route::get('newblog/edit/{blog}',[BlogController::class,('edit')])->name('newblog.edit');
+// Route::post('newblog/update/{blog}',[BlogController::class,('update')])->name('newblog.update');
+// Route::post('newblog/destroy/{blog}',[BlogController::class,('destroy')])->name('newblog.destroy');
 
 Route::get('/admin', [AdminController::class, ('index')])->name('admin');
 Route::get('/admin/widget', [AdminController::class, ('widget')])->name('admin.widget');

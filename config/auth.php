@@ -36,9 +36,15 @@ return [
     */
 
     'guards' => [
+
         'web' => [
             'driver' => 'session',
             'provider' => 'users',
+        ],
+
+        'mobile_users' => [
+            'driver' => 'session',
+            'provider' => 'mobile_users',
         ],
     ],
 
@@ -60,9 +66,15 @@ return [
     */
 
     'providers' => [
+
         'users' => [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
+        ],
+
+        'mobile_users' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\MobileUser::class,
         ],
 
         // 'users' => [

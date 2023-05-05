@@ -54,7 +54,9 @@
                                             <td>{{ $loop->iteration }}</td>
                                             <td>ID-{{ $val->id }}</td>
                                             <td>{{ $val->name }}</td>
-                                            <td>
+                                            <td><div class="mb-3">
+                                                <label for="image"></label>
+                                            </div>
                                                 <img src={{ asset('blog_image/' . $val->image) }} alt="image" style="width:50px; height:50px" />
                                             </td>
                                             <td>{{ $val->description }}</td>
