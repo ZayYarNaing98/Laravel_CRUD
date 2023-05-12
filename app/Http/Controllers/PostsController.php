@@ -5,18 +5,28 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use App\Http\Requests\PostRequest;
+use App\Repository\Post\PostRepositoryInterface;
+use App\Service\Post\PostServiceInterface;
 
 class PostsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    private $postRepo, $postService;
+
+    public function __construct( PostRepositoryInterface $postRepo, PostServiceInterface $postService )
+    {
+        $this->postRepo = $postRepo;
+        $this->postService = $postService;
+    }
+
     public function index()
     {
-        $data = Post::all();
+        // $data = Post::all();
+        // return view('backend.post.index', compact('data'));
+
+        $data = $this->postRepo->get();
+
         return view('backend.post.index', compact('data'));
+
     }
 
     /**
@@ -37,16 +47,6 @@ class PostsController extends Controller
      */
     public function store(PostRequest $request)
     {
-
-        // Post::create([
-        //     'title' => $request->title,
-        //     'description' => $request->description,
-        //     'is_active' => $request->has('is_active') ? 1:0,
-
-        // ]);
-
-        // return redirect()->route('post.index');
-
         $data = $request->validated();
         if($request->hasFile('image'))
         {
@@ -73,7 +73,11 @@ class PostsController extends Controller
      */
     public function show($id)
     {
-        $result = post::where('id', $id)->first();
+        // $result = post::where('id', $id)->first();
+        // return view('backend.post.show', compact('result'));
+
+        $result = $this->postRepo->show($id);
+
         return view('backend.post.show', compact('result'));
     }
 
@@ -104,8 +108,13 @@ class PostsController extends Controller
         $data->update([
             'title' => $request->title,
             'description' => $request->description,
+            // 'image' => $request->image,
             'is_active' => $request->has('is_active') ? 1:0,
         ]);
+
+        // $data = Post::where('id', $id)->first();
+
+        // return $data = update($id, $request->validate());
 
         return redirect()->route('post.index');
     }

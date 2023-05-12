@@ -19,9 +19,17 @@
                         <input type="text" name="title" class="form-control" id="title" value="{{ $result->title }}"/>
 
                     </div>
+
                     <div class="mb-3">
                         <label for="description" class="form-label">Description</label>
                         <input type="text" name="description" class="form-control" id="description" value="{{ $result->description }}" />
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="image" class="form-label">Image</label>
+                        <input type="file" name="image" class="form-control" id="image" value="{{ $result->image }}" />
+                        <br/>
+                        <img src="{{ asset('storage/post_image/' . $result->image) }}" alt="image" style="width:50px; height:50px" />
                     </div>
 
                     <div class="mb-3">

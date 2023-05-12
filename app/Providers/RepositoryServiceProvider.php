@@ -2,11 +2,15 @@
 
 namespace App\Providers;
 
-use App\Repository\Blog\BlogRepository;
-use App\Repository\Blog\BlogRepositoryInterface;
 use App\Service\Blog\BlogService;
-use App\Service\Blog\BlogServiceInterface;
 use Illuminate\Support\ServiceProvider;
+use App\Repository\Blog\BlogRepository;
+use App\Service\Blog\BlogServiceInterface;
+use App\Repository\Blog\BlogRepositoryInterface;
+use App\Repository\Post\PostRepository;
+use App\Repository\Post\PostRepositoryInterface;
+use App\Service\Post\PostService;
+use App\Service\Post\PostServiceInterface;
 
 class RepositoryServiceProvider extends ServiceProvider
 {
@@ -29,6 +33,9 @@ class RepositoryServiceProvider extends ServiceProvider
     {
         $this->app->bind(BlogRepositoryInterface::class, BlogRepository::class);
         $this->app->bind(BlogServiceInterface::class, BlogService::class);
+
+        $this->app->bind(PostRepositoryInterface::class, PostRepository::class);
+        $this->app->bind(PostServiceInterface::class, PostService::class);
 
     }
 }
